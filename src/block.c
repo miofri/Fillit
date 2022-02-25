@@ -11,11 +11,34 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 /*
 **	Place blocks to the top left corner
 **	Set block's letter value to struct
 */
+char	*read_file(char *filename)
+{
+	int		fd;
+	char	*content;
+	int		ret;
+
+	content = ft_strnew(546);
+	if (!content)
+	{
+		return (NULL);
+	}
+	fd = open(filename, O_RDONLY);
+	ret = read(fd, content, 546);
+	if (fd == -1 || ret == -1)
+	{
+		ft_putstr("error\n");
+		return (NULL);
+	}
+	close(fd);
+	return (content);
+}
+
 static int	place_blocks(t_blocks *blocks, char *s)
 {
 	size_t	i;

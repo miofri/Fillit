@@ -35,10 +35,10 @@ all: $(NAME)
 
 $(NAME): $(OFILES)
 	@make -C libft/ all
-	@$(CC) $(CFLAGS) -o $(NAME) $(OFILES) ./libft/libft.a
+	@$(CC) $(CFLAGS) -g -o $(NAME) $(OFILES) ./libft/libft.a
 
 %.o: $(SRC_PATH)/%.c
-	$(CC) -c $(CFLAGS) -o $@ $<
+	$(CC) -g -c $(CFLAGS) -o $@ $<
 
 clean:
 	@make -C libft/ clean

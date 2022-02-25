@@ -150,37 +150,3 @@ int	lets_check(char *argv[])
 	close(fd);
 	return (0);
 }
-
-char	*read_file(char *filename)
-{
-	int		fd;
-	char	*content;
-	int		ret;
-
-	content = ft_strnew(546);
-	if (!content)
-	{
-		return (NULL);
-	}
-	fd = open(filename, O_RDONLY);
-	ret = read(fd, content, 546);
-	if (fd == -1 || ret == -1)
-	{
-		ft_putstr("error\n");
-		return (NULL);
-	}
-	close(fd);
-	return (content);
-}
-
-/*
-int	main(int argc, char *argv[])
-{
-	if (argc != 2)
-		return (write(1, "Usage: ./fillit input_file\n", 27));
-	if (lets_check(argv) != 0)
-		return (printf("invalid file\n"));
-	else
-		return (printf("valid file\n"));
-}
-*/

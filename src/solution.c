@@ -21,13 +21,9 @@ static int	round_up_sqrt(int i)
 
 	size = 2;
 	if (i == 1)
-	{
 		return (1);
-	}
 	while (size * size < i)
-	{
 		size++;
-	}
 	return (size);
 }
 
@@ -51,9 +47,7 @@ static int	install_blocks(t_map *map, t_coord *coor, size_t i)
 		n = map_y + coor[k].y;
 		if (map->new_map[m + n * map->size] != '.' || m >= map->size
 			|| n >= map->size)
-		{
 			return (0);
-		}
 		k++;
 	}
 	while (k > 0)
@@ -77,25 +71,17 @@ static void	searching_solution(t_map *map, t_blocks *blocks, size_t nb_blocks, s
 	size_t	map_size;
 
 	if (nb_blocks == blocks->nb_blocks)
-	{
 		*found = 1;
-	}
 	if (*found == 1)
-	{
 		return ;
-	}
 	i = 0;
 	map_size = map->size * map->size;
 	while (i < map_size && !(*found))
 	{
 		if (install_blocks(map, blocks->blocks[nb_blocks], i))
-		{
 			searching_solution(map, blocks, nb_blocks + 1, found);
-		}
 		if (*found == 0)
-		{
 			free_map(map, blocks->blocks[nb_blocks], i);
-		}
 		i++;
 	}
 }
