@@ -94,15 +94,16 @@ static void	searching_solution(t_map *map, t_blocks *blocks, size_t nb_blocks, s
 ** avoid memory leak
 */
 
-int	final_solution(char *s)
+int	final_solution(char *s, char *argv[])
 {
 	t_map		*map;
 	t_blocks	*blocks;
 	size_t		found;
 	size_t		map_size;
 
+	s[0] = 1;
 	found = 0;
-	blocks = init_blocks(s);
+	blocks = parse(argv);
 	if (!blocks)
 		return (0);
 	map_size = round_up_sqrt(blocks->nb_blocks) * 2;

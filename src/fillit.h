@@ -42,6 +42,10 @@ char		*read_file(char *filename);
 void		print_map(char *s, int size);
 void		free_map(t_map *map, t_coord *coord, size_t i);
 t_map		*create_map(int size);
-int			final_solution(char *s);
+int			final_solution(char *s, char *argv[]);
+
+t_blocks	*parse(char *argv[]);
+int			take_coor(int fd, char *buf, t_blocks *block, size_t o);
+t_blocks	*file_reader(char *argv[], t_blocks *block, char *buf);
 
 #endif

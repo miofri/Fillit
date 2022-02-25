@@ -16,61 +16,62 @@
 **	Place blocks to the top left corner
 **	Set block's letter value to struct
 */
-char	*read_file(char *filename)
+
+t_blocks	*file_reader(char *argv[], t_blocks *block, char *buf)
 {
 	int		fd;
-	char	*content;
 	int		ret;
+	int		count;
 
-	content = ft_strnew(546);
-	if (!content)
-	{
+	count = 0;
+	if (block == NULL)
 		return (NULL);
-	}
-	fd = open(filename, O_RDONLY);
-	ret = read(fd, content, 546);
-	if (fd == -1 || ret == -1)
+	fd = open(argv[1], O_RDONLY);
+	ret = read(fd, buf, 21);
+	while (ret > 0)
 	{
-		ft_putstr("error\n");
-		return (NULL);
+		count++;
+		ret = read(fd, buf, 21);
 	}
 	close(fd);
-	return (content);
+	block->nb_blocks = count;
+	block->blocks = (t_coord **)malloc(sizeof(t_coord *) * count);
+	if (block->blocks == NULL)
+		return (NULL);
+	return (block);
 }
 
-static int	place_blocks(t_blocks *blocks, char *s)
+int	take_coor(int fd, char *buf, t_blocks *block, size_t o)
 {
-	size_t	i;
-	size_t	j;
+	char	letter;
+	int		i;
 	size_t	k;
-	char	c;
 
-	i = 0;
-	c = 'A';
-	while (i < blocks->nb_blocks)
+	letter = 'A';
+	while (read(fd, buf, 21))
 	{
-		k = 0;
-		blocks->blocks[i] = (t_coord *)ft_memalloc(sizeof(t_coord) * 4);
-		if (blocks->blocks[i] == NULL)
+		block->blocks[o] = (t_coord *)malloc(sizeof(t_coord) * 4);
+		if (block->blocks[o] == NULL)
 			return (0);
-		j = i * 21;
-		while (j % 21 != 20)
+		buf[21] = '\0';
+		k = 0;
+		i = -1;
+		while (++i < 21)
 		{
-			if (s[j] == '#')
+			if (buf[i] == '#')
 			{
-				blocks->blocks[i][k].x = (j - i * 21) % 5;
-				blocks->blocks[i][k].y = (j - i * 21) / 5;
-				blocks->blocks[i][k++].letter = i + c;
+				block->blocks[o][k].x = i % 5;
+				block->blocks[o][k].y = i / 5;
+				block->blocks[o][k++].letter = letter + o;
 			}
-			j++;
 		}
-		i++;
+		o++;
 	}
 	return (1);
 }
 
 /*
-** Shift blocks to the correct position
+** Shift blocks to the correct>blocksition
 */
 static void	move_blocks(t_blocks *blocks)
 {
@@ -119,29 +120,24 @@ void	free_block(t_blocks *blocks)
 ** Initial blocks
 */
 
-t_blocks	*init_blocks(char *s)
+t_blocks	*parse(char *argv[])
 {
-	int			i;
-	size_t		count;
-	t_blocks	*blocks;
+	t_blocks	*block;
+	int			fd;
+	char		*buf;
+	size_t		o;
 
-	i = 0;
-	count = 0;
-	blocks = (t_blocks *)ft_memalloc(sizeof(t_blocks));
-	if (!blocks)
+	o = 0;
+	block = (t_blocks *)malloc(sizeof(t_blocks));
+	if (!block)
 		return (0);
-	while (s[i])
-	{
-		if (i % 21 == 0)
-			count++;
-		i++;
-	}
-	blocks->nb_blocks = count;
-	blocks->blocks = (t_coord **)ft_memalloc(sizeof(t_coord *) * count);
-	if (blocks->blocks == NULL)
+	buf = (char *)malloc(sizeof(char) * 546);
+	if (!buf)
 		return (0);
-	if (place_blocks(blocks, s) == 0)
+	block = file_reader(argv, block, buf);
+	fd = open(argv[1], O_RDONLY);
+	if (take_coor(fd, buf, block, o) == 0)
 		return (0);
-	move_blocks(blocks);
-	return (blocks);
+	move_blocks(block);
+	return (block);
 }
