@@ -206,15 +206,14 @@ static int  output(t_blocks *blocks, size_t found, size_t map_size)
     return (1);
 }
 
-int	final_solution(char *s, char *argv[])
+int	final_solution(char **s)
 {
 	t_blocks	*blocks;
 	size_t		found;
 	size_t		map_size;
 
-    s[0] = 1;
 	found = 0;
-	blocks = parse(argv);
+	blocks = parse(s);
 	if (!blocks)
 		return (0);    
 	map_size = round_up_sqrt(blocks->nb_blocks) * 2;
