@@ -91,6 +91,8 @@ static void searching_solution(t_map *map, t_blocks *blocks, size_t nb_blocks, s
     }
 }
 
+// Eastern's old final_solution code
+
 /*
 ** Set block's shape to struct, create map and place blocks
 ** Go thru all the possibilities to get the smallest square
@@ -99,6 +101,7 @@ static void searching_solution(t_map *map, t_blocks *blocks, size_t nb_blocks, s
 ** avoid memory leak
 */
 
+/*
 int final_solution(char *s)
 {
     t_map       *map;
@@ -137,3 +140,86 @@ int final_solution(char *s)
     return (1);
 }
 
+*/
+
+// Sheru's old final_solution code
+
+/*
+int	final_solution(char *s, char *argv[])
+{
+    t_map *map;
+	t_blocks	*blocks;
+	size_t		found;
+	size_t		map_size;
+
+	s[0] = 1;
+	found = 0;
+	blocks = parse(argv);
+	if (!blocks)
+		return (0);    
+	map_size = round_up_sqrt(blocks->nb_blocks) * 2;
+	if (map_size < 4)
+		map_size = 4;
+	while (!found)
+	{
+		map = create_map(map_size);
+		if (!map)
+			return (0);
+		searching_solution(map, blocks, 0, &found);
+		if (!found)
+		{
+			free(map);
+			map_size++;
+		}
+	}
+	print_map(map->new_map, map_size);
+    free_block(blocks);
+	free(map);	
+
+	return (1);
+}
+*/
+
+
+// New final_solution code
+
+static int  output(t_blocks *blocks, size_t found, size_t map_size)
+{
+    t_map *map;
+
+    while (!found)
+	{
+		map = create_map(map_size);
+		if (!map)
+			return (0);
+		searching_solution(map, blocks, 0, &found);
+		if (!found)
+		{
+			free(map);
+			map_size++;
+		}
+	}
+	print_map(map->new_map, map_size);
+    free_block(blocks);
+	free(map);
+
+    return (1);
+}
+
+int	final_solution(char *s, char *argv[])
+{
+	t_blocks	*blocks;
+	size_t		found;
+	size_t		map_size;
+
+    s[0] = 1;
+	found = 0;
+	blocks = parse(argv);
+	if (!blocks)
+		return (0);    
+	map_size = round_up_sqrt(blocks->nb_blocks) * 2;
+	if (map_size < 4)
+		map_size = 4;
+    output(blocks, found, map_size);
+	return (1);
+}
