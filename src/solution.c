@@ -65,7 +65,8 @@ static int	install_blocks(t_map *map, t_coord *coor, size_t i)
 ** If solution didn't found, free map to avoid memory leak
 */
 
-static void	searching_solution(t_map *map, t_blocks *blocks, size_t nb_blocks, size_t *found)
+static void	searching_solution(t_map *map, t_blocks *blocks,
+size_t nb_blocks, size_t *found)
 {
 	size_t	i;
 	size_t	map_size;

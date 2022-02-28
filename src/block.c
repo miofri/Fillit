@@ -138,6 +138,7 @@ t_blocks	*parse(char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	if (take_coor(fd, buf, block, o) == 0)
 		return (0);
+	close(fd);
 	move_blocks(block);
 	return (block);
 }
