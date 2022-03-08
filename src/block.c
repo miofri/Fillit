@@ -16,7 +16,6 @@
 **	Place blocks to the top left corner
 **	Set block's letter value to struct
 */
-
 t_blocks	*file_reader(char *argv[], t_blocks *block, char *buf)
 {
 	int		fd;
@@ -116,10 +115,10 @@ void	free_block(t_blocks *blocks)
 	free(blocks->blocks);
 	free(blocks);
 }
+
 /*
 ** Initial blocks
 */
-
 t_blocks	*parse(char *argv[])
 {
 	t_blocks	*block;

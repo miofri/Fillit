@@ -110,9 +110,7 @@ static int	block_checker(int i, char *buf, int fd, int ret)
 		if (buf[y] == '#')
 			x++;
 		if ((y + 1) % 21 == 0 && x != 4)
-		{
 			return (-1);
-		}
 		else if ((y + 1) % 21 == 0 && x == 4)
 			x = 0;
 		y++;

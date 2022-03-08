@@ -39,7 +39,6 @@ void	print_map(char *s, int size)
 /*
 ** Free map
 */
-
 void	free_map(t_map *map, t_coord *coord, size_t i)
 {
 	size_t	map_width;
@@ -66,22 +65,17 @@ void	free_map(t_map *map, t_coord *coord, size_t i)
 /*
 ** Create new map
 */
-
 t_map	*create_map(int size)
 {
 	t_map	*map;
 
 	map = (t_map *)ft_memalloc(sizeof(t_map));
 	if (!map)
-	{
 		return (NULL);
-	}
 	map->size = size;
 	map->new_map = ft_strnew(size * size);
 	ft_memset(map->new_map, '.', size * size);
 	if (map->new_map == NULL)
-	{
 		return (NULL);
-	}
 	return (map);
 }

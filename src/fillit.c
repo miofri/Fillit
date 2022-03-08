@@ -20,9 +20,7 @@ char	*read_file(char *filename)
 
 	content = ft_strnew(546);
 	if (!content)
-	{
 		return (NULL);
-	}
 	fd = open(filename, O_RDONLY);
 	ret = read(fd, content, 546);
 	if (fd == -1 || ret == -1)
@@ -33,6 +31,7 @@ char	*read_file(char *filename)
 	close(fd);
 	return (content);
 }
+
 int	main(int argc, char *argv[])
 {
 	if (argc != 2)
