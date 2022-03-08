@@ -1,6 +1,5 @@
 
 #include "fillit.h"
-#include <time.h>
 
 /*
 **  Round up number to get a square
