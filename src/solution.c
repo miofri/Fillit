@@ -80,7 +80,6 @@ size_t nb_blocks, size_t *found)
     }
     i = 0;    
     map_size = map->size * map->size;
-    printf("map size: %ld\n", map_size);
     while (i < map_size && !(*found))
     {
         if (install_blocks(map, blocks->blocks[nb_blocks], i))
