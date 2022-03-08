@@ -13,7 +13,7 @@
 #include "fillit.h"
 
 /*
-** Print map
+** Prints map
 */
 void	print_map(char *s, int size)
 {
@@ -37,7 +37,7 @@ void	print_map(char *s, int size)
 }
 
 /*
-** Free map
+** 'Frees' map by replacing all letters with '.'.
 */
 void	free_map(t_map *map, t_coord *coord, size_t i)
 {
@@ -63,7 +63,7 @@ void	free_map(t_map *map, t_coord *coord, size_t i)
 }
 
 /*
-** Create new map
+** Creates new map the size of the given size^2.
 */
 t_map	*create_map(int size)
 {

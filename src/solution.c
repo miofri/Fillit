@@ -28,7 +28,8 @@ static int	round_up_sqrt(int i)
 }
 
 /*
-** Install blocks to the map
+** Installs tetro pieces to the map after checking if
+** the current position is empty.
 */
 static int	install_blocks(t_map *map, t_coord *coor, size_t i)
 {

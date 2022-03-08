@@ -13,8 +13,8 @@
 #include "fillit.h"
 
 /*
-**	Place blocks to the top left corner
-**	Set block's letter value to struct
+** Saves the total numbers of blocks/grids in the file, and allocate memory
+** into block the amount of grids in the file.
 */
 t_blocks	*file_reader(char *argv[], t_blocks *block, char *buf)
 {
@@ -40,6 +40,10 @@ t_blocks	*file_reader(char *argv[], t_blocks *block, char *buf)
 	return (block);
 }
 
+/*
+** Reads the buf by 21 letters each time, and saves the coordinate of the tetro
+** as well as its assigned letter to the 'block' struct.
+*/
 int	take_coor(int fd, char *buf, t_blocks *block, size_t o)
 {
 	char	letter;
@@ -70,7 +74,7 @@ int	take_coor(int fd, char *buf, t_blocks *block, size_t o)
 }
 
 /*
-** Shift blocks to the correct>blocksition
+** Shift blocks to the top left corner.
 */
 static void	move_blocks(t_blocks *blocks)
 {
@@ -116,9 +120,6 @@ void	free_block(t_blocks *blocks)
 	free(blocks);
 }
 
-/*
-** Initial blocks
-*/
 t_blocks	*parse(char *argv[])
 {
 	t_blocks	*block;
