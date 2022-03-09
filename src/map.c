@@ -69,11 +69,11 @@ t_map	*create_map(int size)
 {
 	t_map	*map;
 
-	map = (t_map *)ft_memalloc(sizeof(t_map));
+	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
 	map->size = size;
-	map->new_map = ft_strnew(size * size);
+	map->new_map = ft_strnew((size * size) + 3);
 	ft_memset(map->new_map, '.', size * size);
 	if (map->new_map == NULL)
 		return (NULL);

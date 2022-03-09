@@ -117,12 +117,14 @@ static int	output(t_blocks *blocks, size_t map_size)
 		searching_solution(map, blocks, nb_blocks, &found);
 		if (!found)
 		{
+			free(map->new_map);
 			free(map);
 			map_size++;
 		}
 	}
 	print_map(map->new_map, map_size);
 	free_block(blocks);
+	free(map->new_map);
 	free(map);
 	return (1);
 }

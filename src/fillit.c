@@ -19,8 +19,6 @@ int	main(int argc, char *argv[])
 		ft_putstr("usage: fillit source_file\n");
 		return (0);
 	}
-	if (read_file(argv[1]) == NULL)
-		return (0);
 	if (lets_check(argv) != 0)
 	{
 		ft_putstr("error\n");
