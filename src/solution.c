@@ -13,7 +13,7 @@
 #include "fillit.h"
 
 /*
-**  Round up number to get a square
+** Round up number to get a square
 */
 static int	round_up_sqrt(int i)
 {
@@ -61,9 +61,9 @@ static int	install_blocks(t_map *map, t_coord *coor, size_t i)
 }
 
 /*
-** Check for the smallest square without overlap
-** Use recursion to check is there any block will fit the place
-** If solution didn't found, free map to avoid memory leak
+** Check for the smallest square without overlap.
+** Use recursion to check is there any block will fit the place.
+** If solution didn't found, free map to avoid memory leak.
 */
 static void	searching_solution(t_map *map, t_blocks *blocks,
 size_t nb_blocks, size_t *found)
@@ -95,6 +95,12 @@ size_t nb_blocks, size_t *found)
 	return ;
 }
 
+/*
+** Part of searching solution, create map based on number of tetros and start
+** the recursive loop to find the smallest square. if solution was not found,
+** increase the map size and print out the correct solution and free
+** unnecessary blocks and map memory.
+*/
 static int	output(t_blocks *blocks, size_t map_size)
 {
 	t_map	*map;
