@@ -13,7 +13,7 @@
 #include "fillit.h"
 
 /*
-** Prints map
+** Prints item in the map, the size of size * size.
 */
 void	print_map(char *s, int size)
 {

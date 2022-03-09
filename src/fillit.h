@@ -14,7 +14,6 @@
 # define FILLIT_H
 # include <fcntl.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include "../libft/libft.h"
 
 typedef struct s_map

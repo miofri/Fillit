@@ -74,7 +74,8 @@ int	take_coor(int fd, char *buf, t_blocks *block, size_t o)
 }
 
 /*
-** Shift blocks to the top left corner.
+** Shift blocks to the top left corner by shifting the x & y coordinates
+** towards 0.
 */
 static void	move_blocks(t_blocks *blocks)
 {
@@ -104,7 +105,7 @@ static void	move_blocks(t_blocks *blocks)
 }
 
 /*
-** Free blocks
+** Free the memory allocated for blocks.
 */
 void	free_block(t_blocks *blocks)
 {
